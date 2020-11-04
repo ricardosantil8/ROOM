@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ROOM</string>
+    <string name="add_student">Adicionar Estudante</string>
+    <string name="insertEscola">Instituição</string>
+    <string name="insertAluno">Aluno</string>
+    <string name="empty_not_saved">Não guardado</string>
+    <string name="create_new">Criar novo</string>
+    <string name="open">Abrir</string>
+    <string name="file">Ficheiro</string>
+    <string name="Save">Guardar</string>
+    <string name="mostrar_todos">Mostrar Todos</string>
+    <string name="apagar_tudo">Apagar Tudo</string>
+    <string name="alunos_da_estg">Alunos da ESTG</string>
+    <string name="escola_do_ricardo">Escola do Ricardo</string>
+    <string name="apagar_o_ricardo">Apagar o Ricardo</string>
+    <string name="alterar">Alterar</string>
+    <string name="alterar_o_ricardo">Alterar o Ricardo</string>
+</resources>
