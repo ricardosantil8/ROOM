@@ -11,25 +11,41 @@ import ipvc.estg.room.R
 
 class AddAluno : AppCompatActivity() {
 
-    private lateinit var studentText: EditText
-    private lateinit var escolaText: EditText
+    private lateinit var studentEdit: EditText
+    private lateinit var escolaEdit: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_student)
 
-        studentText = findViewById(R.id.student)
-        escolaText = findViewById(R.id.escola)
+        studentEdit = findViewById(R.id.student)
+        escolaEdit = findViewById(R.id.escola)
 
-        //Botão de criar aluno
+        val intents = intent.extras
+        var ids = -10
+
+        if(intent != null)
+        {
+            var aluno = intent.getStringExtra("Aluno")
+            var escola = intent.getStringExtra("Escola")
+            ids = intent.getIntExtra("id",-10)
+
+            studentEdit.setText(aluno)
+            escolaEdit.setText(escola)
+        }
+
+
         val button = findViewById<Button>(R.id.button_save)
         button.setOnClickListener {
             val replyIntent = Intent()
-            if (TextUtils.isEmpty(studentText.text)) {
+            if (TextUtils.isEmpty(studentEdit.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
-                replyIntent.putExtra(EXTRA_REPLY_STUDENT, studentText.text.toString())
-                replyIntent.putExtra(EXTRA_REPLY_ESCOLA, escolaText.text.toString())
+
+                if(ids != -10){ replyIntent.putExtra(EXTRA_REPLY_ID, ids)}
+
+                replyIntent.putExtra(EXTRA_REPLY_STUDENT, studentEdit.text.toString())
+                replyIntent.putExtra(EXTRA_REPLY_ESCOLA, escolaEdit.text.toString())
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
@@ -39,6 +55,7 @@ class AddAluno : AppCompatActivity() {
     companion object {
         const val EXTRA_REPLY_STUDENT = "com.example.android.aluno"
         const val EXTRA_REPLY_ESCOLA = "com.example.android.escola"
+        const val EXTRA_REPLY_ID = "com.example.android.id"
     }
 }
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ROOM</string>
     <string name="add_student">Add Student</string>
     <string name="insertEscola">Insituition</string>
     <string name="insertAluno">Student</string>
@@ -16,4 +15,5 @@
     <string name="apagar_o_ricardo">Delete Ricardo</string>
     <string name="alterar">Change</string>
     <string name="alterar_o_ricardo">Change Ricardo</string>
+    <string name="app_name">ROOM</string>
 </resources>

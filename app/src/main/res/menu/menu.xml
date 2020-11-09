@@ -29,24 +29,6 @@
         app:showAsAction="ifRoom">
     </item>
 
-    <item android:id="@+id/getEscolafromRicardo"
-        android:title="@string/escola_do_ricardo"
-        app:showAsAction="never">
-    </item>
 
-    <item android:id="@+id/apagarRicardo"
-        android:title="@string/apagar_o_ricardo"
-        app:showAsAction="never">
-    </item>
-
-    <item android:id="@+id/alterar"
-        android:title="@string/alterar"
-        app:showAsAction="never">
-    </item>
-
-    <item android:id="@+id/alterarRicardo"
-        android:title="@string/alterar_o_ricardo"
-        app:showAsAction="never">
-    </item>
 
 </menu>

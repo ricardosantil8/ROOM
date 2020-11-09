@@ -14,6 +14,9 @@ interface AlunoDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(aluno: Aluno)
 
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateAluno(aluno: Aluno)
+
     @Query("DELETE FROM aluno_table")
     suspend fun deleteAll()
 
@@ -23,13 +26,11 @@ interface AlunoDao {
     @Query("SELECT * FROM aluno_table WHERE aluno == :aluno")
     fun getEscolabyAluno(aluno: String): LiveData<Aluno>
 
-    @Update
-    suspend fun updateAluno(aluno: Aluno)
 
-    @Query("DELETE FROM aluno_table where aluno == :aluno")
-    suspend fun deleteByAluno(aluno: String)
 
     @Query("UPDATE aluno_table SET escola=:escola WHERE aluno == :aluno")
     suspend fun updateEscolafromAluno(aluno: String, escola: String)
 
+    @Delete
+    suspend fun delete(aluno: Aluno)
 }

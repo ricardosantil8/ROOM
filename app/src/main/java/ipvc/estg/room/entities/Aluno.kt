@@ -11,5 +11,6 @@ class Aluno(
     @PrimaryKey(autoGenerate = true) val id: Int? = null,
     @ColumnInfo(name = "aluno") val aluno: String,
     @ColumnInfo(name = "escola") val escola: String
+
 )
 

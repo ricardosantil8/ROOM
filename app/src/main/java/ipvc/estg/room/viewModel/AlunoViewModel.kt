@@ -37,8 +37,8 @@ class AlunoViewModel(application: Application) : AndroidViewModel(application) {
         repository.deleteAll()
     }
 
-    fun deleteByAluno(aluno: String) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteByAluno(aluno)
+    fun delete(aluno: Aluno) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(aluno)
     }
 
     fun getAlunobyEscola(escola: String): LiveData<List<Aluno>> {

@@ -30,8 +30,8 @@ class AlunoRepository(private val alunoDao: AlunoDao) {
         return alunoDao.getEscolabyAluno(aluno)
     }
 
-    suspend fun deleteByAluno(aluno: String){
-        alunoDao.deleteByAluno(aluno)
+    suspend fun delete(aluno: Aluno){
+        alunoDao.delete(aluno)
     }
 
     suspend fun updateAluno(aluno: Aluno) {

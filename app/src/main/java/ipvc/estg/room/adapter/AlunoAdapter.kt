@@ -11,9 +11,10 @@ import ipvc.estg.room.entities.Aluno
 
 
 class AlunoAdapter internal constructor(
-    context: Context
+        context: Context
 ) : RecyclerView.Adapter<AlunoAdapter.AlunoViewHolder>() {
 
+    val activity = context as ItemClicked
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var alunos = emptyList<Aluno>()
 
@@ -26,15 +27,38 @@ class AlunoAdapter internal constructor(
         return AlunoViewHolder(itemView)
     }
 
+
     override fun onBindViewHolder(holder: AlunoViewHolder, position: Int) {
         val current = alunos[position]
-        holder.alunoItemView.text = current.id.toString() + " |  " + current.aluno + " | " + current.escola
+        holder.alunoItemView.text =
+                current.id.toString() + " |  " + current.aluno + " | " + current.escola
+
+        //holder.itemView.setOnClickListener(activity.onClickListener(alunos.get(position)))
+        holder.itemView.setOnClickListener(View.OnClickListener { activity.onClickListener(alunos.get(position)) })
+
     }
 
-    internal fun setAlunos(cities: List<Aluno>) {
-        this.alunos = cities
+    internal fun setAlunos(alunos: List<Aluno>) {
+        this.alunos = alunos
         notifyDataSetChanged()
     }
 
     override fun getItemCount() = alunos.size
+
+    interface ItemClicked {
+        fun onClickListener(aluno: Aluno) {
+
+        }
+    }
+
+    fun getWordAtPosition(position: Int): Aluno {
+        return alunos[position]
+    }
+
 }
+
+
+
+
+
+

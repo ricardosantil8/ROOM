@@ -31,15 +31,15 @@ public abstract class AlunoDB : RoomDatabase() {
                     var AlunoDao = database.AlunoDao()
 
                     // Delete all content here.
-                    AlunoDao.deleteAll()
-
+                    //AlunoDao.deleteAll()
+/*
                     var aluno = Aluno(1, "João", "ESCE")
                     AlunoDao.insert(aluno)
                     aluno = Aluno(2, "Ricardo", "ESTG")
                     AlunoDao.insert(aluno)
                     aluno = Aluno(3, "Ana", "ESE")
                     AlunoDao.insert(aluno)
-
+*/
                 }
             }
         }
@@ -63,7 +63,7 @@ public abstract class AlunoDB : RoomDatabase() {
                     "aluno_database",
                 )
                     //estratégia de destruição
-                    .fallbackToDestructiveMigration()
+                    //.fallbackToDestructiveMigration()
                     .addCallback(WordDatabaseCallback(scope))
                     .build()
 
