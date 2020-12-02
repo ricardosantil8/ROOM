@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:text="BEM VINDO"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Informe e seja informado!"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <EditText
+        android:id="@+id/utilizador"
+        android:layout_width="181dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:fontFamily="sans-serif-light"
+        android:hint="Username"
+        android:inputType="textAutoComplete"
+        android:textColor="#000000"
+        android:textColorHint="#403E3E"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="182dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:fontFamily="sans-serif-light"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#403E3E"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="176dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:text="@string/login"
+        app:backgroundTint="#10A512" />
+
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+
+        android:text="Manter sessão iniciada"
+        android:textColor="#000000" />
+
+
+</LinearLayout>

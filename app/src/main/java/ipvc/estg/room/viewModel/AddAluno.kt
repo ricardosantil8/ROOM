@@ -34,8 +34,8 @@ class AddAluno : AppCompatActivity() {
             escolaEdit.setText(escola)
         }
 
-
-        val button = findViewById<Button>(R.id.button_save)
+        //Quando guardo o aluno
+        val button = findViewById<Button>(R.id.Login)
         button.setOnClickListener {
             val replyIntent = Intent()
             if (TextUtils.isEmpty(studentEdit.text)) {

@@ -1,11 +1,14 @@
 package ipvc.estg.room
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -14,10 +17,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ipvc.estg.room.adapter.AlunoAdapter
+import ipvc.estg.room.api.EndPoints
+import ipvc.estg.room.api.ServiceBuilder
+import ipvc.estg.room.api.User
 import ipvc.estg.room.entities.Aluno
 import ipvc.estg.room.viewModel.AddAluno
 import ipvc.estg.room.viewModel.AlunoViewModel
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 import java.nio.file.Files.delete
+
 import androidx.lifecycle.ViewModelProvider as ViewModelProvider1
 
 
@@ -26,6 +38,7 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
     private lateinit var alunoViewModel: AlunoViewModel
     private val newWordActivityRequestCode = 1
     private val editAlunoRequestCode = 2
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +68,7 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
 
         }
 
+        //Swipe da recycler view para apagar o aluno DELETE
         val helper = ItemTouchHelper(
                 object : ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
@@ -82,12 +96,14 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = AlunoAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter.notifyDataSetChanged()
 
+        // quando o botão de adicionar aluno é clicado
         if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
             val paluno = data?.getStringExtra(AddAluno.EXTRA_REPLY_STUDENT)
             val pescola = data?.getStringExtra(AddAluno.EXTRA_REPLY_ESCOLA)
@@ -95,9 +111,11 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
             if (paluno != null && pescola != null) {
                 val aluno = Aluno(aluno = paluno, escola = pescola)
                 alunoViewModel.insert(aluno)
+                
             }
-
-        } else if (requestCode == editAlunoRequestCode && resultCode == Activity.RESULT_OK) {
+        // quando é clicado na recycler view para fazer o update
+        }
+        else if (requestCode == editAlunoRequestCode && resultCode == Activity.RESULT_OK) {
             val pid = data?.getIntExtra(AddAluno.EXTRA_REPLY_ID, -10)
             val paluno = data?.getStringExtra(AddAluno.EXTRA_REPLY_STUDENT)
             val pescola = data?.getStringExtra(AddAluno.EXTRA_REPLY_ESCOLA)
@@ -107,7 +125,8 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
                 val aluno = Aluno(id = pid, aluno = paluno, escola = pescola)
                 alunoViewModel.updateAluno(aluno)
             }
-        } else {
+        }
+        else {
             Toast.makeText(
                     applicationContext,
                     "Empty aluno",
@@ -178,6 +197,8 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
         }
     }
 
+
+    // quando for clicado a recycler view para mandar os valores para a view da recycler para update
     override fun onClickListener(aluno: Aluno) {
         Toast.makeText(applicationContext, "Editar Aluno", Toast.LENGTH_SHORT).show()
 
@@ -189,6 +210,9 @@ class MainActivity : AppCompatActivity(), AlunoAdapter.ItemClicked {
 
         // this.finish()
     }
+
+
+
 
 
 

@@ -27,7 +27,6 @@ interface AlunoDao {
     fun getEscolabyAluno(aluno: String): LiveData<Aluno>
 
 
-
     @Query("UPDATE aluno_table SET escola=:escola WHERE aluno == :aluno")
     suspend fun updateEscolafromAluno(aluno: String, escola: String)
 

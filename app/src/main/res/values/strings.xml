@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">ROOM</string>
-    <string name="add_student">Adicionar Estudante</string>
-    <string name="insertEscola">Instituição</string>
-    <string name="insertAluno">Aluno</string>
+    <string name="add_student">Adicionar Nota</string>
+    <string name="insertEscola">Nota</string>
+    <string name="insertAluno">Titulo</string>
     <string name="empty_not_saved">Não guardado</string>
     <string name="create_new">Criar novo</string>
     <string name="open">Abrir</string>
@@ -15,4 +15,16 @@
     <string name="apagar_o_ricardo">Apagar o Ricardo</string>
     <string name="alterar">Alterar</string>
     <string name="alterar_o_ricardo">Alterar o Ricardo</string>
+    <string name="title_activity_login">activity_login</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="login">LOGIN</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main2">MainActivity</string>
 </resources>
