@@ -15,8 +15,8 @@ interface EndPoints
                  @Field("passutilizador") passutilizador: String?) : Call<OutputPost>
 
 
-    @GET("/users/")
-    fun getUsers(): Call<List<User>>
+    @GET("/myslim/api/acidente")
+    fun getUsers(): Call<List<Acidentes>>
 }
 
 

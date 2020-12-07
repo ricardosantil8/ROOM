@@ -62,8 +62,7 @@ class Login() : AppCompatActivity() {
                                 // SHARED PREFERENCES + MANTER SESSÃO INCICIADA ATRAVÉS DO TOOGLE
 
                                 val switch1: Switch = findViewById(R.id.switch1)
-                                switch1.setOnCheckedChangeListener { _, isChecked ->
-                                    if (isChecked) {
+                                if(switch1.isEnabled){
 
                                         //Toast.makeText(this@Login, "Toogle On", Toast.LENGTH_SHORT).show()
 
@@ -93,7 +92,6 @@ class Login() : AppCompatActivity() {
 
                             }
                         }
-                    }
 
                     override fun onFailure(call: Call<OutputPost>, t: Throwable) {
                         Toast.makeText(

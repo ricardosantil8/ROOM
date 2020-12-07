@@ -1,14 +1,12 @@
 package ipvc.estg.room
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -17,18 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import ipvc.estg.room.adapter.AlunoAdapter
-import ipvc.estg.room.api.EndPoints
-import ipvc.estg.room.api.ServiceBuilder
-import ipvc.estg.room.api.User
 import ipvc.estg.room.entities.Aluno
 import ipvc.estg.room.viewModel.AddAluno
 import ipvc.estg.room.viewModel.AlunoViewModel
-
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-
-import java.nio.file.Files.delete
 
 import androidx.lifecycle.ViewModelProvider as ViewModelProvider1
 

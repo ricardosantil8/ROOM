@@ -27,4 +27,7 @@
     <string name="login">LOGIN</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main2">MainActivity</string>
+    <string name="AdicionarPonto">Adicionar Ponto</string>
+    <string name="Logout">Logout</string>
+    <string name="Descrição">Descrição</string>
 </resources>
