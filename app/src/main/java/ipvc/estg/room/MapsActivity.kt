@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
@@ -30,6 +29,10 @@ import retrofit2.Callback
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+
 
     private lateinit var mMap: GoogleMap
     private lateinit var users: List<Acidentes>
@@ -72,33 +75,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-
-
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(p0: LocationResult)
+        locationCallback = object : LocationCallback()
         {
+            override fun onLocationResult(p0: LocationResult) {
             super.onLocationResult(p0)
             lastLocation = p0.lastLocation
             var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
-            findViewById<TextView>(R.id.txtcoordenadas).setText("Lat: " + loc.latitude + " - Long: " + loc.longitude)
+            Toast.makeText(this@MapsActivity, "Lat: " + loc.latitude.toString() + " Long : " + loc.longitude.toString(), Toast.LENGTH_SHORT).show()
             }
         }
-
-
-
-
-
         createLocationRequest()
     }
-
-
 
     private fun createLocationRequest() {
         locationRequest = LocationRequest()
         // interval specifies the rate at which your app will like to receive updates. locationRequest.interval = 10000
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
     }
+
+
 
     /**
      * Manipulates the map once available.
@@ -109,6 +105,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
+
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         setUpMap()
@@ -132,6 +130,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+
                 }
             }
         }
@@ -173,7 +172,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) { ActivityCompat.requestPermissions(this,
             arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-            LOCATION_PERMISSION_REQUEST_CODE) return
+            LOCATION_PERMISSION_REQUEST_CODE)
+            return
         }
         fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */) }
 
@@ -186,7 +186,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     public override fun onResume()
     {
-        super.onResume() startLocationUpdates()
+        super.onResume()
+        startLocationUpdates()
     }
 
 }
