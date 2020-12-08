@@ -2,5 +2,6 @@ package ipvc.estg.room.api
 
 data class OutputPost (
     val error: Boolean,
-    val title: String
+    val utilizador_id: Int
 )
+

@@ -1,6 +1,5 @@
 package ipvc.estg.room.api
 
-import android.icu.util.Output
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -21,40 +20,42 @@ class AddAcidente : AppCompatActivity() {
         val fab = findViewById<Button>(R.id.Adicionar)
         fab.setOnClickListener {
 
-        }
             val descricao = descricao.text.toString().trim()
-
             val extras = intent.extras
 
-                val latitude = extras?.getString("lat")
-                val longitude = extras?.getString("lng")
-                val nomeutilizador = extras?.getString("utilizador")
-                Toast.makeText(this@AddAcidente, latitude + " - " + longitude , Toast.LENGTH_SHORT).show()
+            val latitude = extras?.getString("lat")
+            val longitude = extras?.getString("lng")
+            val utilizador_id = extras?.getString("utilizador_id")
 
+            //Toast.makeText(this@AddAcidente, "ID :" + utilizador_id, Toast.LENGTH_SHORT).show()
+
+            val utilizadorID = utilizador_id?.toInt()
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.getAcidente(latitude, longitude, nomeutilizador, descricao)
-
+            val call = request.getAcidente(latitude, longitude, utilizadorID, descricao)
 
 
             call.enqueue(object : Callback<OutputPost> {
 
                 override fun onResponse(call: Call<OutputPost>, response: Response<OutputPost>) {
-                    if (response.isSuccessful) {   //Se a resposta for positiva na camada de serviços significa que o acidente foi criado
-                        if (response.body()?.error == false) {
+                    if (response.isSuccessful) {
+                        //Se a resposta for positiva na camada de serviços significa que o acidente foi criado
+                        if (response.body()?.error == true) {
                             Toast.makeText(this@AddAcidente, "Acidente Adicionado", Toast.LENGTH_SHORT).show()
                         }
-                      }
+                        else{
+                            Toast.makeText(this@AddAcidente, "Acidente não adicionado", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                }
 
                 override fun onFailure(call: Call<OutputPost>, t: Throwable) {
                     Toast.makeText(this@AddAcidente, "Erro na criação do acidente", Toast.LENGTH_SHORT).show()
                 }
-            }
+            })
         }
     }
-
-
+}
 
 
 

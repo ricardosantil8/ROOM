@@ -1,6 +1,7 @@
 package ipvc.estg.room.api
 
 
+import android.icu.util.Output
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,8 +23,8 @@ interface EndPoints
     @POST("/myslim/api/novoacidente")
     fun getAcidente(@Field("latitude") latitude: String?,
                     @Field("longitude") longitude: String?,
-                    @Field("nomeutilizador") nomeutilizador: String?,
-                    @Field("descricao") descr_acidente: String): Call<List<Acidentes>>
+                    @Field("id") utilizador_id: Int?,
+                    @Field("descricao") descr_acidente: String) : Call<OutputPost>
 }
 
 

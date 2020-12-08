@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import ipvc.estg.room.api.EndPoints
@@ -57,16 +58,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var position: LatLng
 
 
+        //Introduzir todos os pontos no mapa que estao na Base de dados
         call.enqueue(object : Callback<List<Acidentes>> {
             override fun onResponse(call: Call<List<Acidentes>>, response: Response<List<Acidentes>>) {
                 if (response.isSuccessful) {
                     users = response.body()!!
-                    for (user in users) {
-                        //Toast.makeText(this@MapsActivity, user.lat, Toast.LENGTH_SHORT).show()
+                    val extras = intent.extras
+                    val utilizadorID  = extras?.getString("utilizador_id")
 
-                        position = LatLng(user.lat.toString().toDouble(),
-                                          user.long.toString().toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(user.nomeutilizador + " - " + user.descricao))
+                    for (user in users) {
+
+                        position = LatLng(user.lat.toString().toDouble(), user.long.toString().toDouble())
+                        var utilizador_id = user.utilizador_id.toString()
+
+                            if(user.utilizador_id == utilizadorID?.toInt())
+                            {
+                            mMap.addMarker(MarkerOptions()
+                                    .position(position)
+                                    .title(utilizador_id + " - " + user.descricao)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            }
+                            else
+                            {
+                                mMap.addMarker(MarkerOptions()
+                                        .position(position)
+                                        .title(utilizador_id + " - " + user.descricao)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+                            }
                     }
                 }
             }
@@ -75,6 +93,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+
         locationCallback = object : LocationCallback()
         {
             override fun onLocationResult(p0: LocationResult) {
@@ -82,17 +101,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             lastLocation = p0.lastLocation
             var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
-            Toast.makeText(this@MapsActivity, "Lat: " + loc.latitude.toString() + " Long : " + loc.longitude.toString(), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this@MapsActivity, "Lat: " + loc.latitude.toString() + " Long : " + loc.longitude.toString(), Toast.LENGTH_SHORT).show()
             }
         }
         createLocationRequest()
     }
 
-    private fun createLocationRequest() {
-        locationRequest = LocationRequest()
-        // interval specifies the rate at which your app will like to receive updates. locationRequest.interval = 10000
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-    }
+        private fun createLocationRequest() {
+            locationRequest = LocationRequest()
+            // interval specifies the rate at which your app will like to receive updates. locationRequest.interval = 10000
+            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
 
 
 
@@ -131,6 +150,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     val currentLatLng = LatLng(location.latitude, location.longitude)
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
 
+
                 }
             }
         }
@@ -148,20 +168,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return when (item.itemId) {
 
             R.id.Criarponto -> {
+                val extras = intent.extras
+                val utilizador_id  = extras?.getString("utilizador_id")
 
                 var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 val intent = Intent(this@MapsActivity, AddAcidente::class.java)
                 intent.putExtra("lat", loc.latitude.toString())
                 intent.putExtra("lng", loc.longitude.toString())
+                intent.putExtra("utilizador_id", utilizador_id)
                 startActivity(intent)
                 //finish()
                 true
 
-
-
-                true
             }
             R.id.Logout -> {
+
                 var token = getSharedPreferences("utilizador", Context.MODE_PRIVATE)
                 intent.putExtra("utilizador", " ")
                 var editor = token.edit()
@@ -176,15 +197,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun startLocationUpdates() {
+    private fun startLocationUpdates()
+    {
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) { ActivityCompat.requestPermissions(this,
             arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
             LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null /* Looper */) }
 
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)}
 
 
     override fun onPause() {
