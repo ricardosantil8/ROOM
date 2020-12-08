@@ -30,4 +30,6 @@
     <string name="AdicionarPonto">Adicionar Ponto</string>
     <string name="Logout">Logout</string>
     <string name="Descrição">Descrição</string>
+    <string name="Criar">Criar</string>
+    <string name="CriarAcidente">Criar Acidente</string>
 </resources>

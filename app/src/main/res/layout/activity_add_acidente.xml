@@ -14,11 +14,11 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/Login"
+        android:id="@+id/Adicionar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/purple_700"
-        android:text="@string/Save"
+        android:text="@string/CriarAcidente"
         />
 
 </LinearLayout>

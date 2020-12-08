@@ -6,6 +6,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.model.LatLng
+import ipvc.estg.room.api.AddAcidente
 import ipvc.estg.room.api.EndPoints
 import ipvc.estg.room.api.OutputPost
 import ipvc.estg.room.api.ServiceBuilder
@@ -55,6 +57,11 @@ class Login() : AppCompatActivity() {
                                     "Username ou palavra passe incorreta",
                                     Toast.LENGTH_SHORT
                                 ).show()
+
+
+                                val intent = Intent(this@Login, AddAcidente::class.java)
+                                intent.putExtra("utilizador", utilizador)
+                                startActivity(intent)
                             }
                             else
                             {

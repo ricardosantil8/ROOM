@@ -148,9 +148,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         return when (item.itemId) {
 
             R.id.Criarponto -> {
+
+                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 val intent = Intent(this@MapsActivity, AddAcidente::class.java)
+                intent.putExtra("lat", loc.latitude.toString())
+                intent.putExtra("lng", loc.longitude.toString())
                 startActivity(intent)
                 //finish()
+                true
+
+
+
                 true
             }
             R.id.Logout -> {
