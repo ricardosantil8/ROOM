@@ -24,7 +24,8 @@ interface EndPoints
     fun getAcidente(@Field("latitude") latitude: String?,
                     @Field("longitude") longitude: String?,
                     @Field("id") utilizador_id: Int?,
-                    @Field("descricao") descr_acidente: String) : Call<OutputPost>
+                    @Field("descricao") descr_acidente: String,
+                    @Field("tipo_id") tipo_id: Int?) : Call<OutputPost>
 }
 
 

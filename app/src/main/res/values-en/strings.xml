@@ -16,4 +16,20 @@
     <string name="alterar">Change</string>
     <string name="alterar_o_ricardo">Change Ricardo</string>
     <string name="app_name">ROOM</string>
+    <string name="title_activity_login">Login Activity</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="AdicionarPonto">Add point</string>
+    <string name="Descrição">Description</string>
+    <string name="Criar">Add</string>
+    <string name="CriarAcidente">Add Acidente</string>
+    <string name="Idutilizador">UserID</string>
+    <string name="Remover">Remove</string>
+    <string name="Atualizar">Update</string>
+    <string name="Voltar">Back</string>
+    <string name="nomeapp">Acidents</string>
+    <string name="Tipo">Type</string>
+    <string name="FiltrarAcidentes">Acident Type Filter</string>
+    <string name="Apresentartodos">Show All Points</string>
 </resources>

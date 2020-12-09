@@ -15,21 +15,33 @@
     <string name="apagar_o_ricardo">Apagar o Ricardo</string>
     <string name="alterar">Alterar</string>
     <string name="alterar_o_ricardo">Alterar o Ricardo</string>
-    <string name="title_activity_login">activity_login</string>
+    <string name="title_activity_login">Atividade de Login</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="login">LOGIN</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main2">MainActivity</string>
+    <string name="next">Próximo</string>
+    <string name="previous">Anterior</string>
+    <string name="login" translatable="false">LOGIN</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="title_activity_main2" translatable="false">MainActivity</string>
     <string name="AdicionarPonto">Adicionar Ponto</string>
-    <string name="Logout">Logout</string>
+    <string name="Logout" translatable="false">Logout</string>
     <string name="Descrição">Descrição</string>
     <string name="Criar">Criar</string>
     <string name="CriarAcidente">Criar Acidente</string>
+    <string name="title_activity_map_point" translatable="false">MapPoint</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+
+    <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
+    <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="Idutilizador">Utilizador Id</string>
+    <string name="Longitude" translatable="false">Longitude</string>
+    <string name="Latitude" translatable="false">Latitude</string>
+    <string name="Remover">Remover</string>
+    <string name="Atualizar">Atualizar</string>
+    <string name="Voltar">Voltar</string>
+    <string name="nomeapp">Acidentes</string>
+    <string name="Tipo">Tipo</string>
+    <string name="FiltrarAcidentes">Filtrar por Acidentes</string>
+    <string name="Apresentartodos">Apresentar todos</string>
 </resources>

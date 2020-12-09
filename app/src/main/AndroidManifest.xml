@@ -17,14 +17,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ROOM">
-        <activity android:name=".api.AddAcidente"></activity>
+        <activity
+            android:name=".MapPoint"
+            android:label="@string/title_activity_map_point"
+            android:theme="@style/Theme.ROOM.NoActionBar"></activity>
+        <activity android:name=".api.AddAcidente" />
         <activity
             android:name=".Login"
-            android:label="@string/title_activity_login"
+            android:label="@string/nomeapp"
             android:theme="@style/Theme.ROOM.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

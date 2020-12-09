@@ -4,29 +4,29 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import ipvc.estg.room.api.Acidentes
+import ipvc.estg.room.api.AddAcidente
 import ipvc.estg.room.api.EndPoints
 import ipvc.estg.room.api.ServiceBuilder
 import retrofit2.Call
-import retrofit2.Response
-import ipvc.estg.room.api.Acidentes
-import ipvc.estg.room.api.AddAcidente
 import retrofit2.Callback
+import retrofit2.Response
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -64,30 +64,73 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (response.isSuccessful) {
                     users = response.body()!!
                     val extras = intent.extras
-                    val utilizadorID  = extras?.getString("utilizador_id")
+                    val utilizadorID = extras?.getString("utilizador_id")
+                    val tipo = extras?.getInt("tipo_id")
+
+                    //Toast.makeText(this@MapsActivity, "Tipo " + tipo, Toast.LENGTH_SHORT).show()
+
+
+
 
                     for (user in users) {
-
+                    if(tipo == 0){
                         position = LatLng(user.lat.toString().toDouble(), user.long.toString().toDouble())
                         var utilizador_id = user.utilizador_id.toString()
 
-                            if(user.utilizador_id == utilizadorID?.toInt())
-                            {
+                        if (user.utilizador_id == utilizadorID?.toInt()) {
                             mMap.addMarker(MarkerOptions()
                                     .position(position)
                                     .title(utilizador_id + " - " + user.descricao)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                        } else {
+                            mMap.addMarker(
+                                MarkerOptions()
+                                    .position(position)
+                                    .title(utilizador_id + " - " + user.descricao)
+                                    .icon(
+                                        BitmapDescriptorFactory.defaultMarker(
+                                            BitmapDescriptorFactory.HUE_GREEN
+                                        )
+                                    )
+                            )
                             }
-                            else
+                        }
+                        else
+                        {
+                            position = LatLng(user.lat.toString().toDouble(), user.long.toString().toDouble())
+                            var utilizador_id = user.utilizador_id.toString()
+                            if(tipo == user.tipo_id)
                             {
-                                mMap.addMarker(MarkerOptions()
-                                        .position(position)
-                                        .title(utilizador_id + " - " + user.descricao)
-                                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)))
+                                if (user.utilizador_id == utilizadorID?.toInt()) {
+                                    mMap.addMarker(
+                                        MarkerOptions()
+                                            .position(position)
+                                            .title(utilizador_id + " - " + user.descricao)
+                                            .icon(
+                                                BitmapDescriptorFactory.defaultMarker(
+                                                    BitmapDescriptorFactory.HUE_AZURE
+                                                )
+                                            )
+                                    )
+                                } else {
+                                    mMap.addMarker(
+                                        MarkerOptions()
+                                            .position(position)
+                                            .title(utilizador_id + " - " + user.descricao)
+                                            .icon(
+                                                BitmapDescriptorFactory.defaultMarker(
+                                                    BitmapDescriptorFactory.HUE_GREEN
+                                                )
+                                            )
+                                    )
+                                }
                             }
+
+                        }
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Acidentes>>, t: Throwable) {
                 Toast.makeText(this@MapsActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
@@ -129,15 +172,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         setUpMap()
-    }
+
+       /* mMap.setOnMarkerClickListener { marker ->
+            if (marker.isInfoWindowShown) {
+                //val intent = Intent(this@MapsActivity, MapPoint::class.java)
+                //startActivity(intent)
+                Toast.makeText(
+                    this@MapsActivity,
+                    "Não foi possível efetuar o login",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+
+            } else {
+
+            }
+            true
+        }*/
+        }
+
 
     fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
-        } else {
+        }
+        else
+        {
+
             // 1
             mMap.isMyLocationEnabled = true
             // 2
@@ -156,6 +220,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu2, menu)
@@ -169,7 +234,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             R.id.Criarponto -> {
                 val extras = intent.extras
-                val utilizador_id  = extras?.getString("utilizador_id")
+                val utilizador_id = extras?.getString("utilizador_id")
 
                 var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 val intent = Intent(this@MapsActivity, AddAcidente::class.java)
@@ -193,6 +258,36 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 true
             }
 
+            R.id.Filtrar -> {
+
+                val extras = intent.extras
+                val utilizador_id = extras?.getString("utilizador_id")
+
+
+                val intent = Intent(this@MapsActivity, MapsActivity::class.java)
+                var tipo = 2
+                intent.putExtra("tipo_id", tipo)
+                intent.putExtra("utilizador_id", utilizador_id)
+                startActivity(intent)
+                finish()
+                true
+                
+            }
+
+            R.id.apresentar -> {
+                val extras = intent.extras
+                val utilizador_id = extras?.getString("utilizador_id")
+
+
+                val intent = Intent(this@MapsActivity, MapsActivity::class.java)
+                var tipo = 0
+                intent.putExtra("tipo_id", tipo)
+                intent.putExtra("utilizador_id", utilizador_id)
+                startActivity(intent)
+                finish()
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -200,9 +295,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun startLocationUpdates()
     {
         if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) { ActivityCompat.requestPermissions(this,
-            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-            LOCATION_PERMISSION_REQUEST_CODE)
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) { ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
 
@@ -220,4 +315,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         startLocationUpdates()
     }
 
+    public override fun onRestart() {
+        super.onRestart()
+        val extras = intent.extras
+        val utilizador_id = extras?.getString("utilizador_id")
+        val intent = Intent(this@MapsActivity, MapsActivity::class.java)
+        intent.putExtra("utilizador_id", utilizador_id)
+        startActivity(intent)
+        finish()
+
+    }
 }

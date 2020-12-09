@@ -11,4 +11,11 @@
         android:title="@string/AdicionarPonto">
     </item>
 
+    <item android:id="@+id/Filtrar"
+        android:title="@string/FiltrarAcidentes">
+    </item>
+
+    <item android:id="@+id/apresentar"
+        android:title="@string/Apresentartodos">
+    </item>
 </menu>

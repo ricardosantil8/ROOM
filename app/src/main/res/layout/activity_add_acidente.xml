@@ -13,6 +13,28 @@
         android:inputType="textAutoComplete"
         android:textSize="18sp" />
 
+    <EditText
+        android:id="@+id/tipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:hint="@string/Tipo"
+        android:inputType="textAutoComplete"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1 - Obras" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2 - Acidentes" />
+
+
     <Button
         android:id="@+id/Adicionar"
         android:layout_width="match_parent"

@@ -7,6 +7,7 @@ data class Acidentes(
     val lat: String,
     val long: String,
     val descricao: String,
-    val error: Boolean
+    val error: Boolean,
+    val tipo_id: Int
 )
 

@@ -21,18 +21,21 @@ class AddAcidente : AppCompatActivity() {
         fab.setOnClickListener {
 
             val descricao = descricao.text.toString().trim()
+            val tipo = tipo.text.toString().trim()
+            val tipo_id = tipo.toInt()
             val extras = intent.extras
 
             val latitude = extras?.getString("lat")
             val longitude = extras?.getString("lng")
             val utilizador_id = extras?.getString("utilizador_id")
 
+            Toast.makeText(this@AddAcidente, "Tipo " + tipo, Toast.LENGTH_SHORT).show()
             //Toast.makeText(this@AddAcidente, "ID :" + utilizador_id, Toast.LENGTH_SHORT).show()
 
             val utilizadorID = utilizador_id?.toInt()
 
             val request = ServiceBuilder.buildService(EndPoints::class.java)
-            val call = request.getAcidente(latitude, longitude, utilizadorID, descricao)
+            val call = request.getAcidente(latitude, longitude, utilizadorID, descricao, tipo_id)
 
 
             call.enqueue(object : Callback<OutputPost> {
@@ -42,6 +45,7 @@ class AddAcidente : AppCompatActivity() {
                         //Se a resposta for positiva na camada de serviços significa que o acidente foi criado
                         if (response.body()?.error == true) {
                             Toast.makeText(this@AddAcidente, "Acidente Adicionado", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                         else{
                             Toast.makeText(this@AddAcidente, "Acidente não adicionado", Toast.LENGTH_SHORT).show()
